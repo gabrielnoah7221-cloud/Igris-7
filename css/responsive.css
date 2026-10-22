@@ -1,0 +1,37 @@
+/* Narrow Android Phones (320px - 375px) */
+@media (max-width: 375px) {
+  .telemetry-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .chapter-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .achievements-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .countdown-number {
+    font-size: 1.65rem;
+  }
+}
+
+/* Tablets & Desktops (640px+) */
+@media (min-width: 640px) {
+  .main-viewport {
+    padding: var(--space-4) var(--space-4) var(--space-6);
+  }
+
+  .hero-banner {
+    min-height: 180px;
+  }
+
+  .subject-progress-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
