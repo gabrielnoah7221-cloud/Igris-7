@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="shadow-blue" data-motion="full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#050811">
+  <meta name="description" content="IGRIS V7 — Personal Evolution System. Dark Fantasy RPG NEET 2027, Fitness, and Discipline Tracker.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="IGRIS V7">
+  <title>IGRIS V7 — Personal Evolution System</title>
+
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="./assets/icons/icon.svg">
+  <link rel="apple-touch-icon" href="./assets/icons/icon.svg">
+
+  <link rel="stylesheet" href="./css/variables.css">
+  <link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/layout.css">
+  <link rel="stylesheet" href="./css/components.css">
+  <link rel="stylesheet" href="./css/screens.css">
+  <link rel="stylesheet" href="./css/animations.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+</head>
+<body>
+  <!-- Splash Screen -->
+  <div id="splash-screen" class="splash-screen" role="dialog" aria-label="Loading IGRIS System">
+    <div class="splash-content">
+      <div class="splash-artwork-wrap">
+        <img src="./assets/images/splash.svg" alt="Igris Shadow Knight Emblem" class="splash-art" width="180" height="180">
+        <div class="splash-ring"></div>
+      </div>
+      <h1 class="splash-title">IGRIS</h1>
+      <p class="splash-subtitle">DISCIPLINE BUILDS LEGENDS</p>
+      <div class="splash-loader" aria-hidden="true">
+        <div id="splash-progress-bar" class="splash-loader-bar"></div>
+      </div>
+      <p id="splash-status-text" class="splash-status">INITIALIZING SYSTEM PROTOCOLS...</p>
+      <button type="button" id="splash-skip-btn" class="btn btn-ghost btn-sm splash-skip">ENTER SYSTEM</button>
+    </div>
+  </div>
+
+  <!-- App Background Layer -->
+  <div class="system-bg-overlay" aria-hidden="true"></div>
+
+  <!-- Main App Shell -->
+  <div id="app-shell" class="app-shell">
+    <!-- Top System Header -->
+    <header class="app-header">
+      <div class="header-left">
+        <img src="./assets/icons/icon.svg" alt="" class="header-emblem" width="34" height="34">
+        <div>
+          <div class="header-system-tag">SYSTEM // V7.0</div>
+          <div class="header-player-row">
+            <span id="header-player-name" class="header-player-name">HUNTER</span>
+            <span id="header-rank-badge" class="badge badge-rank">E-RANK</span>
+          </div>
+        </div>
+      </div>
+      <div class="header-right">
+        <div id="network-status-pill" class="network-pill online" title="Offline Ready">
+          <span class="status-dot"></span>
+          <span id="network-status-label">ONLINE</span>
+        </div>
+        <div class="header-level-pill">
+          <span class="lvl-prefix">LVL</span>
+          <strong id="header-level-num">1</strong>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Scrollable Viewport -->
+    <main id="main-viewport" class="main-viewport">
+
+      <!-- ==========================================
+           1. HOME SCREEN
+           ========================================== -->
+      <section id="screen-home" class="app-screen active" aria-labelledby="home-title">
+        <div class="hero-banner">
+          <img src="./assets/images/home-hero.svg" alt="Shadow Commander Sovereign" class="hero-banner-img" loading="eager">
+          <div class="hero-banner-content">
+            <div class="system-notice-tag">DAILY SYSTEM DIRECTIVE</div>
+            <h2 id="home-title" class="hero-title">ARISE &amp; CONQUER</h2>
+            <p id="home-quote" class="hero-quote">"The difference between the novice and the master is that the master has failed more times than the novice has tried."</p>
+          </div>
+        </div>
+
+        <!-- Player XP & Rank Bar -->
+        <div class="card card-glow xp-overview-card">
+          <div class="xp-card-top">
+            <div>
+              <span class="text-xs text-muted">CURRENT EVOLUTION</span>
+              <div class="xp-rank-line">
+                <strong id="home-level-display" class="text-lg">Level 1</strong>
+                <span id="home-title-display" class="text-cyan text-sm">Shadow Initiate</span>
+              </div>
+            </div>
+            <div class="streak-pill" title="Active Daily Streak">
+              <svg class="icon-svg icon-cyan" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+              <span id="home-streak-count">0</span>
+              <span class="text-xs">DAY STREAK</span>
+            </div>
+          </div>
+          <div class="progress-track progress-lg" role="progressbar" aria-label="Experience Points Progress" aria-valuemin="0" aria-valuemax="100" id="home-xp-progressbar">
+            <div id="home-xp-fill" class="progress-fill" style="width: 0%"></div>
+          </div>
+          <div class="xp-card-meta">
+            <span id="home-xp-current">0 XP</span>
+            <span id="home-xp-next">1,000 XP TO NEXT LEVEL</span>
+          </div>
+        </div>
+
+        <!-- NEET Countdown & Quick Actions Grid -->
+        <div class="grid-2">
+          <div class="card countdown-card">
+            <div class="card-header-compact">
+              <span class="system-label">TARGET WARZONE</span>
+              <button type="button" class="btn-icon-inline" data-nav-sub="settings" aria-label="Configure Target Date" title="Configure Date">
+                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 15a3 3 0 100-6 3 3 0 000 6z"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+              </button>
+            </div>
+            <div id="home-neet-days" class="countdown-number">--</div>
+            <div class="countdown-meta">
+              <span>DAYS REMAINING</span>
+              <small id="home-neet-date-label" class="text-muted">Target: 2027-05-02</small>
+            </div>
+          </div>
+
+          <div class="card attr-mini-card" data-nav-target="status" role="button" tabindex="0" aria-label="View full status attributes">
+            <div class="card-header-compact">
+              <span class="system-label">CORE STATS</span>
+              <span class="text-xs text-cyan">VIEW &rarr;</span>
+            </div>
+            <div class="attr-mini-grid">
+              <div class="attr-pill"><span>STR</span><strong id="home-stat-str">10</strong></div>
+              <div class="attr-pill"><span>VIT</span><strong id="home-stat-vit">10</strong></div>
+              <div class="attr-pill"><span>INT</span><strong id="home-stat-int">10</strong></div>
+              <div class="attr-pill"><span>DISC</span><strong id="home-stat-disc">10</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Today's Vital Telemetry -->
+        <div class="card">
+          <div class="section-header">
+            <h3 class="section-title">TODAY'S TELEMETRY</h3>
+            <button type="button" id="btn-open-study-modal" class="btn btn-primary btn-sm">+ LOG STUDY</button>
+          </div>
+          <div class="telemetry-grid">
+            <div class="telemetry-box">
+              <span class="telemetry-label">STUDY HOURS</span>
+              <strong id="home-today-study" class="telemetry-val">0.0h</strong>
+            </div>
+            <div class="telemetry-box">
+              <span class="telemetry-label">MCQs SOLVED</span>
+              <strong id="home-today-mcqs" class="telemetry-val">0</strong>
+            </div>
+            <div class="telemetry-box">
+              <span class="telemetry-label">WORKOUT</span>
+              <strong id="home-today-workout" class="telemetry-val">0m</strong>
+            </div>
+            <div class="telemetry-box">
+              <span class="telemetry-label">SLEEP</span>
+              <strong id="home-today-sleep" class="telemetry-val">0.0h</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Today's Quests Summary -->
+        <div class="card">
+          <div class="section-header">
+            <div>
+              <h3 class="section-title">DAILY QUEST DIRECTIVES</h3>
+              <p class="text-xs text-muted" id="home-quests-subtitle">0 / 5 Completed Today</p>
+            </div>
+            <button type="button" class="btn btn-outline btn-sm" data-nav-target="quests">ALL QUESTS</button>
+          </div>
+          <div id="home-quest-list" class="compact-quest-list"></div>
+        </div>
+
+        <!-- Weekly Boss Preview Card -->
+        <div class="card boss-preview-card">
+          <div class="boss-preview-header">
+            <div>
+              <span class="badge badge-danger">WEEKLY RAID BOSS</span>
+              <h3 class="section-title mt-1">BLOOD-RED COMMANDER TRIAL</h3>
+            </div>
+            <button type="button" class="btn btn-outline btn-sm" data-nav-sub="boss">ENTER RAID</button>
+          </div>
+          <p class="text-xs text-muted mb-2">Defeat the weekly standard before Sunday midnight to claim +500 Bonus XP.</p>
+          <div class="progress-track">
+            <div id="home-boss-progress-fill" class="progress-fill progress-fill-crimson" style="width: 0%"></div>
+          </div>
+          <div class="xp-card-meta mt-1">
+            <span id="home-boss-status-text">Overall Raid Damage: 0%</span>
+            <span id="home-boss-reward-tag" class="text-cyan">+500 XP</span>
+          </div>
+        </div>
+
+        <!-- Quick Tactical Portal Cards -->
+        <div class="section-header mt-3 mb-2">
+          <h3 class="section-title">COMBAT &amp; ACADEMIC MODULES</h3>
+        </div>
+        <div class="grid-2">
+          <button type="button" class="portal-card" data-nav-sub="mcq">
+            <div class="portal-icon-wrap">
+              <svg class="icon-svg icon-cyan" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+            </div>
+            <div class="portal-info">
+              <strong>MCQ ARENA</strong>
+              <span id="portal-mcq-stat" class="text-xs text-muted">Log &amp; Analyze Accuracy</span>
+            </div>
+          </button>
+
+          <button type="button" class="portal-card" data-nav-sub="mocks">
+            <div class="portal-icon-wrap">
+              <svg class="icon-svg icon-cyan" viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+            </div>
+            <div class="portal-info">
+              <strong>MOCK EXAMS</strong>
+              <span id="portal-mock-stat" class="text-xs text-muted">Score out of 720</span>
+            </div>
+          </button>
+
+          <button type="button" class="portal-card" data-nav-sub="fitness">
+            <div class="portal-icon-wrap">
+              <svg class="icon-svg icon-cyan" viewBox="0 0 24 24"><path d="M6.5 6.5L17.5 17.5M3 10l7-7M14 21l7-7M2 6l4-4M18 22l4-4"/></svg>
+            </div>
+            <div class="portal-info">
+              <strong>BODY &amp; FITNESS</strong>
+              <span id="portal-fit-stat" class="text-xs text-muted">Workouts, Weight &amp; Sleep</span>
+            </div>
+          </button>
+
+          <button type="button" class="portal-card" data-nav-sub="achievements">
+            <div class="portal-icon-wrap">
+              <svg class="icon-svg icon-cyan" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+            </div>
+            <div class="portal-info">
+              <strong>RELICS &amp; TITLES</strong>
+              <span id="portal-ach-stat" class="text-xs text-muted">Unlocked Trophies</span>
+            </div>
+          </button>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           2. STATUS SCREEN
+           ========================================== -->
+      <section id="screen-status" class="app-screen" aria-labelledby="status-title" hidden>
+        <div class="hero-banner hero-compact">
+          <img src="./assets/images/status-hero.svg" alt="Hunter Status Core" class="hero-banner-img" loading="lazy">
+          <div class="hero-banner-content">
+            <div class="system-notice-tag">HUNTER DIAGNOSTICS</div>
+            <h2 id="status-title" class="hero-title">STATUS WINDOW</h2>
+          </div>
+        </div>
+
+        <div class="card card-glow">
+          <div class="status-identity-grid">
+            <div>
+              <span class="system-label">DESIGNATION</span>
+              <h3 id="status-player-name" class="text-lg">HUNTER</h3>
+              <p id="status-player-title" class="text-cyan text-sm">Shadow Initiate</p>
+            </div>
+            <div class="status-rank-orb">
+              <span class="text-xs text-muted">RANK</span>
+              <strong id="status-rank-letter" class="rank-giant">E</strong>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="status-metrics-row">
+            <div>
+              <span class="text-xs text-muted">LEVEL</span>
+              <strong id="status-level-val" class="block text-lg">1</strong>
+            </div>
+            <div>
+              <span class="text-xs text-muted">TOTAL XP</span>
+              <strong id="status-total-xp" class="block text-lg">0</strong>
+            </div>
+            <div>
+              <span class="text-xs text-muted">STREAK</span>
+              <strong id="status-streak-val" class="block text-lg">0d</strong>
+            </div>
+          </div>
+
+          <div class="progress-track mt-2">
+            <div id="status-xp-bar" class="progress-fill" style="width: 0%"></div>
+          </div>
+          <p id="status-xp-detail" class="text-xs text-muted mt-1">0 / 1,000 XP required for next evolution</p>
+        </div>
+
+        <!-- 4 Core Attributes -->
+        <div class="card">
+          <div class="section-header">
+            <h3 class="section-title">CORE ATTRIBUTES</h3>
+            <span class="text-xs text-muted">Earned from Real Actions</span>
+          </div>
+          <div class="attributes-list">
+            <div class="attribute-row">
+              <div class="attr-badge attr-str">STR</div>
+              <div class="attr-details">
+                <div class="attr-top">
+                  <strong>STRENGTH (STR)</strong>
+                  <span id="status-attr-str-val" class="attr-score">10</span>
+                </div>
+                <p class="text-xs text-muted">Driven by logged workouts, physical training minutes, and step milestones.</p>
+              </div>
+            </div>
+
+            <div class="attribute-row">
+              <div class="attr-badge attr-vit">VIT</div>
+              <div class="attr-details">
+                <div class="attr-top">
+                  <strong>VITALITY (VIT)</strong>
+                  <span id="status-attr-vit-val" class="attr-score">10</span>
+                </div>
+                <p class="text-xs text-muted">Driven by consistent 7h+ sleep logs, recovery days, and body telemetry tracking.</p>
+              </div>
+            </div>
+
+            <div class="attribute-row">
+              <div class="attr-badge attr-int">INT</div>
+              <div class="attr-details">
+                <div class="attr-top">
+                  <strong>INTELLIGENCE (INT)</strong>
+                  <span id="status-attr-int-val" class="attr-score">10</span>
+                </div>
+                <p class="text-xs text-muted">Driven by study hours, completed NEET syllabus chapters, MCQs, and Mock tests.</p>
+              </div>
+            </div>
+
+            <div class="attribute-row">
+              <div class="attr-badge attr-disc">DISC</div>
+              <div class="attr-details">
+                <div class="attr-top">
+                  <strong>DISCIPLINE (DISC)</strong>
+                  <span id="status-attr-disc-val" class="attr-score">10</span>
+                </div>
+                <p class="text-xs text-muted">Driven by daily quest completions, active streaks, and mistake revision sessions.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Radar / Attribute Balance Visual & Weekly Activity -->
+        <div class="card">
+          <h3 class="section-title mb-2">ATTRIBUTE BALANCE MATRIX</h3>
+          <div id="status-radar-container" class="chart-container"></div>
+        </div>
+
+        <div class="card">
+          <div class="section-header">
+            <h3 class="section-title">7-DAY STUDY &amp; ACTIVITY</h3>
+            <button type="button" id="btn-status-log-study" class="btn btn-outline btn-sm">+ LOG STUDY</button>
+          </div>
+          <div id="status-weekly-chart" class="chart-container"></div>
+          <div id="status-weekly-summary" class="telemetry-grid mt-2"></div>
+        </div>
+
+        <!-- System Rules Accordion -->
+        <details class="card system-rules-card">
+          <summary class="section-title cursor-pointer">SYSTEM XP &amp; STAT RULESET</summary>
+          <div class="rules-content mt-2 text-sm text-muted">
+            <p><strong>Level Formula:</strong> Required XP for Next Level = <code>Current Level × 1,000 XP</code>.</p>
+            <p><strong>Hunter Ranks:</strong> E (Lvl 1–2) • D (Lvl 3–6) • C (Lvl 7–11) • B (Lvl 12–19) • A (Lvl 20–29) • S (Lvl 30+).</p>
+            <p><strong>Attribute Scaling:</strong> Every attribute starts at Base 10 and scales dynamically from your genuine saved records (Workouts &rarr; STR, Sleep &amp; Health Logs &rarr; VIT, Study Hours/Chapters/MCQs/Mocks &rarr; INT, Quests/Streaks/Revisions &rarr; DISC).</p>
+            <p><strong>Anti-Cheat Protocol:</strong> Quests can only be claimed once per local calendar day. Weekly Boss rewards can only be claimed once per ISO week.</p>
+          </div>
+        </details>
+      </section>
+
+      <!-- ==========================================
+           3. QUESTS SCREEN
+           ========================================== -->
+      <section id="screen-quests" class="app-screen" aria-labelledby="quests-title" hidden>
+        <div class="hero-banner hero-compact">
+          <img src="./assets/images/quests-hero.svg" alt="Daily Directives" class="hero-banner-img" loading="lazy">
+          <div class="hero-banner-content">
+            <div class="system-notice-tag">MANDATORY PREPARATION</div>
+            <h2 id="quests-title" class="hero-title">DAILY QUESTS</h2>
+          </div>
+        </div>
+
+        <div class="card card-glow">
+          <div class="section-header">
+            <div>
+              <span class="system-label" id="quests-date-display">TODAY</span>
+              <h3 class="section-title">ACTIVE DIRECTIVES</h3>
+            </div>
+            <button type="button" id="btn-edit-quest-targets" class="btn btn-outline btn-sm">CONFIGURE TARGETS</button>
+          </div>
+          <p class="text-xs text-muted mb-2">Progress automatically syncs with your logged Study, MCQ, Workout, and Sleep sessions, or you can log progress directly below. Claiming a completed quest awards XP once per day.</p>
+          <div id="quests-full-list" class="quest-cards-stack"></div>
+        </div>
+
+        <!-- Quick Log Bar for Quests -->
+        <div class="card">
+          <h3 cla
