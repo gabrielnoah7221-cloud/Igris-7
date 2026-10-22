@@ -1,0 +1,20 @@
+{
+  "name": "IGRIS V7 — Personal Evolution System",
+  "short_name": "IGRIS V7",
+  "description": "Dark-Fantasy RPG Personal Evolution, NEET 2027 Syllabus, MCQ, Mock Test, and Physical Conditioning System.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#04070f",
+  "theme_color": "#050811",
+  "categories": ["education", "health", "fitness", "productivity"],
+  "icons": [
+    {
+      "src": "./assets/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
