@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 320" width="800" height="320" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#040814"/>
+      <stop offset="50%" stop-color="#0a1936"/>
+      <stop offset="100%" stop-color="#04070f"/>
+    </linearGradient>
+    <radialGradient id="monarchGlow" cx="72%" cy="45%" r="45%">
+      <stop offset="0%" stop-color="#00d2ff" stop-opacity="0.42"/>
+      <stop offset="60%" stop-color="#3a7bd5" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#04070f" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="320" fill="url(#sky)"/>
+  <rect width="800" height="320" fill="url(#monarchGlow)"/>
+
+  <!-- Cyber-Fantasy Grid Horizon -->
+  <g stroke="#1e3a6e" stroke-width="1" opacity="0.45">
+    <line x1="0" y1="260" x2="800" y2="260"/>
+    <line x1="0" y1="290" x2="800" y2="290"/>
+    <line x1="120" y1="220" x2="40" y2="320"/>
+    <line x1="280" y1="220" x2="240" y2="320"/>
+    <line x1="440" y1="220" x2="460" y2="320"/>
+    <line x1="600" y1="220" x2="680" y2="320"/>
+  </g>
+
+  <!-- Shadow Knight Sovereign Silhouette (Right Side) -->
+  <g transform="translate(470, 22)">
+    <path d="M110 10 L145 75 L110 58 L75 75 Z" fill="#00d2ff" opacity="0.85"/>
+    <path d="M40 95 L110 60 L180 95 L225 210 L185 285 L35 285 L-5 210 Z" fill="#071126" stroke="#00d2ff" stroke-width="3"/>
+    <polygon points="72,135 104,146 98,156 68,145" fill="#00d2ff"/>
+    <polygon points="148,135 116,146 122,156 152,145" fill="#00d2ff"/>
+    <polygon points="110,75 117,155 110,245 103,155" fill="#00d2ff"/>
+  </g>
+</svg>
