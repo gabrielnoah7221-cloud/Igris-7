@@ -1,5 +1,5 @@
 /**
- * IGRIS V7 — Lightweight Dependency-Free SVG Charting Engine
+ * IGRIS V7 — Lightweight Dependency-Free SVG Charting Engine (Theme-Aware)
  */
 
 import { escapeHTML } from './storage.js';
@@ -31,12 +31,12 @@ export function renderAttributeRadarSVG(container, attributes) {
 
   container.innerHTML = `
     <svg viewBox="0 0 260 210" width="100%" height="200" role="img" aria-label="Attribute Balance Radar Chart">
-      <circle cx="${cx}" cy="${cy}" r="${radius}" fill="rgba(5,12,28,0.7)" stroke="rgba(58,123,213,0.3)" stroke-width="1"/>
-      <circle cx="${cx}" cy="${cy}" r="${radius * 0.66}" fill="none" stroke="rgba(58,123,213,0.22)" stroke-dasharray="3 3"/>
-      <circle cx="${cx}" cy="${cy}" r="${radius * 0.33}" fill="none" stroke="rgba(58,123,213,0.18)" stroke-dasharray="2 2"/>
-      <line x1="${cx}" y1="${cy - radius}" x2="${cx}" y2="${cy + radius}" stroke="rgba(58,123,213,0.25)"/>
-      <line x1="${cx - radius}" y1="${cy}" x2="${cx + radius}" y2="${cy}" stroke="rgba(58,123,213,0.25)"/>
-      <polygon points="${polyPoints}" fill="rgba(0, 210, 255, 0.25)" stroke="#00d2ff" stroke-width="2"/>
+      <circle cx="${cx}" cy="${cy}" r="${radius}" fill="rgba(5,12,28,0.7)" stroke="var(--border-subtle)" stroke-width="1"/>
+      <circle cx="${cx}" cy="${cy}" r="${radius * 0.66}" fill="none" stroke="var(--border-subtle)" stroke-dasharray="3 3"/>
+      <circle cx="${cx}" cy="${cy}" r="${radius * 0.33}" fill="none" stroke="var(--border-subtle)" stroke-dasharray="2 2"/>
+      <line x1="${cx}" y1="${cy - radius}" x2="${cx}" y2="${cy + radius}" stroke="var(--border-subtle)"/>
+      <line x1="${cx - radius}" y1="${cy}" x2="${cx + radius}" y2="${cy}" stroke="var(--border-subtle)"/>
+      <polygon points="${polyPoints}" fill="var(--accent-soft)" stroke="var(--accent-primary)" stroke-width="2"/>
       <text x="${cx}" y="18" text-anchor="middle" fill="#f0f6ff" font-size="11" font-weight="700">INT (${INT})</text>
       <text x="${cx + radius + 34}" y="${cy + 4}" text-anchor="middle" fill="#f0f6ff" font-size="11" font-weight="700">STR (${STR})</text>
       <text x="${cx}" y="${cy + radius + 20}" text-anchor="middle" fill="#f0f6ff" font-size="11" font-weight="700">VIT (${VIT})</text>
@@ -70,8 +70,8 @@ export function renderWeeklyBarChartSVG(container, daysData) {
     return `
       <g>
         <rect x="${x}" y="${y}" width="${barW}" height="${barH}" rx="4"
-          fill="${val > 0 ? 'url(#barGrad)' : 'rgba(58,123,213,0.18)'}" />
-        <text x="${x + barW / 2}" y="${y - 5}" text-anchor="middle" fill="#00d2ff" font-size="9.5" font-weight="700">
+          fill="${val > 0 ? 'var(--accent-primary)' : 'rgba(58,123,213,0.18)'}" />
+        <text x="${x + barW / 2}" y="${y - 5}" text-anchor="middle" fill="var(--accent-primary)" font-size="9.5" font-weight="700">
           ${val > 0 ? `${val}h` : ''}
         </text>
         <text x="${x + barW / 2}" y="${height - 10}" text-anchor="middle" fill="#a5b8d8" font-size="10">
@@ -83,13 +83,7 @@ export function renderWeeklyBarChartSVG(container, daysData) {
 
   container.innerHTML = `
     <svg viewBox="0 0 ${width} ${height}" width="100%" height="165" role="img" aria-label="7-Day Study Hours Bar Chart">
-      <defs>
-        <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#00d2ff"/>
-          <stop offset="100%" stop-color="#3a7bd5"/>
-        </linearGradient>
-      </defs>
-      <line x1="10" y1="${chartBottom}" x2="${width - 10}" y2="${chartBottom}" stroke="rgba(58,123,213,0.35)" stroke-width="1"/>
+      <line x1="10" y1="${chartBottom}" x2="${width - 10}" y2="${chartBottom}" stroke="var(--border-subtle)" stroke-width="1"/>
       ${barsSvg}
     </svg>
   `;
@@ -102,7 +96,7 @@ export function renderLineTrendSVG(container, points, options = {}) {
     unit = '',
     minY = null,
     maxY = null,
-    strokeColor = '#00d2ff'
+    strokeColor = 'var(--accent-primary)'
   } = options;
 
   if (!Array.isArray(points) || points.length === 0) {
@@ -149,9 +143,10 @@ export function renderLineTrendSVG(container, points, options = {}) {
 
   container.innerHTML = `
     <svg viewBox="0 0 ${width} ${height}" width="100%" height="165" role="img" aria-label="Trend Line Chart">
-      <line x1="${padX}" y1="${bottomY}" x2="${width - padX}" y2="${bottomY}" stroke="rgba(58,123,213,0.35)" stroke-width="1"/>
+      <line x1="${padX}" y1="${bottomY}" x2="${width - padX}" y2="${bottomY}" stroke="var(--border-subtle)" stroke-width="1"/>
       ${coords.length > 1 ? `<polyline fill="none" stroke="${strokeColor}" stroke-width="2.5" points="${polylinePts}"/>` : ''}
       ${circlesSvg}
     </svg>
   `;
 }
+
