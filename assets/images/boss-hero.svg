@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300" width="800" height="300" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <radialGradient id="crimsonCore" cx="68%" cy="45%" r="50%">
+      <stop offset="0%" stop-color="#f43f5e" stop-opacity="0.48"/>
+      <stop offset="65%" stop-color="#881337" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#050710" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="300" fill="#080610"/>
+  <rect width="800" height="300" fill="url(#crimsonCore)"/>
+  <g transform="translate(470, 18)">
+    <path d="M120 5 L165 95 L120 72 L75 95 Z" fill="#f43f5e"/>
+    <path d="M45 100 L120 65 L195 100 L225 220 L120 275 L15 220 Z" fill="#180712" stroke="#f43f5e" stroke-width="3.5"/>
+    <polygon points="75,145 110,160 102,172 68,158" fill="#fb7185"/>
+    <polygon points="165,145 130,160 138,172 172,158" fill="#fb7185"/>
+    <polygon points="120,82 128,165 120,250 112,165" fill="#f43f5e"/>
+  </g>
+</svg>
